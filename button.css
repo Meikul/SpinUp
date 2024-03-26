@@ -1,0 +1,40 @@
+button.btn {
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: var(--text-sm);
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  background: rgb(var(--foreground));
+  transition: all 0.15s var(--spinup-ease);
+  justify-content: center;
+  gap: 2px;
+
+  &:hover {
+    background: rgb(var(--foreground)/.8);
+  }
+
+  &:active {
+    background: rgb(var(--foreground)/.7);
+  }
+
+  &.fab {
+    padding: 0;
+    border-radius: 50%;
+    height: 4rem;
+    width: 4rem;
+
+    span.material-symbols-outlined{
+      font-size: 20px;
+    }
+  }
+
+  span.material-symbols-outlined {
+    font-size: inherit;
+  }
+}
+
