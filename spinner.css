@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Tilt+Neon:XROT,YROT@-45..45,-45..45&family=Tilt+Warp:XROT,YROT@-45..45,-45..45&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght,GRAD,YTUC@8..144,100..1000,-200..150,528..760&display=swap');
 
-.loader-tilt {
+.loader-stretch {
   /* font-family: 'Roboto Flex', sans-serif; */
   font-family: 'Geist Sans';
   font-size: 4rem;
@@ -18,22 +18,15 @@
     animation-timing-function: ease-in-out;
     animation-delay: calc(var(--split-index)*calc(var(--duration)*.1));
     animation-iteration-count: infinite;
-    /* font-variation-settings: 'XROT' -0, 'YROT' -10; */
-    /* font-variation-settings: 'YTUC' 528; */
     transform: scaleY(1) translateY(0px);
-    /* font-size: 1.4em; */
-
-    /* scale: 0.8; */
   }
 }
 
 @keyframes stretch {
   0% {
-    /* font-variation-settings: 'YTUC' 528; */
     transform: scaleY(1) translateY(0px);
   }
   50% {
-    /* font-variation-settings: 'YTUC' 760; */
     transform: scaleY(1.5) translateY(14px);
   }
 }
@@ -50,5 +43,24 @@
     /* scale: 1.2; */
     transform: translateY(15px);
     font-variation-settings: 'XROT' 0, 'YROT' 10;
+  }
+}
+
+svg.loader-ring {
+  width: 100px;
+  color: rgb(var(--foreground));
+  transform: rotate(0);
+  animation: ring-rotate 9s linear infinite;
+
+  text {
+    font-family: monospace;
+    font-size: 17.3px;
+    font-weight: bold;
+  }
+}
+
+@keyframes ring-rotate {
+  to {
+    transform: rotate(360deg);
   }
 }

@@ -9,19 +9,6 @@
   border: 1px solid rgb(var(--border-color));
   border-radius: 8px;
 
-  /* &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    height: 30px;
-    width: 30px;
-    top: 50%;
-    right: 10px;
-    background: rgb(var(--background)/.4);
-    border-radius: 50%;
-    z-index: 5;
-  } */
-
   .indicator {
     position: absolute;
     display: flex;
@@ -66,7 +53,6 @@
     }
 
     &.center {
-      /* display: block; */
       left: 50%;
       z-index: 2;
       visibility: visible;

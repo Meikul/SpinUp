@@ -2,7 +2,9 @@ const carousels = document.querySelectorAll('.carousel');
 
 carousels.forEach((c) => {
   c.dataset.index = 0;
-  createIndicator(c);
+  if(c.querySelector('.indicator')){
+    createIndicator(c);
+  }
   nextSlide(c);
   const imgs = c.querySelectorAll('img');
   setTimeout(() => {
@@ -12,7 +14,6 @@ carousels.forEach((c) => {
   }, 0);
 
   const duration = c.dataset.duration ? parseFloat(c.dataset.duration) : 5000;
-  // const duration = parseInt(c.dataset.duration);
   setInterval(() => {
     nextSlide(c);
   }, duration);
@@ -38,7 +39,7 @@ function nextSlide(carousel) {
   const imgs = carousel.querySelectorAll('img');
   const dots = carousel.querySelectorAll('.dot');
   const leftIndex = (index === 0) ? imgs.length-1 : index - 1;
-  dots[index].classList.add('active');
+  dots[index]?.classList.add('active');
   imgs[index].classList.add('center');
   imgs[leftIndex].classList.add('left');
   carousel.dataset.index = (index + 1) % imgs.length;

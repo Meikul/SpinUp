@@ -1,6 +1,6 @@
-const tiltLoader = document.querySelector('.loader-tilt');
+// const tiltLoader = document.querySelector('.loader-tilt');
 
-splitUp(tiltLoader);
+// splitUp(tiltLoader);
 
 function splitUp(el) {
   const letters = el.innerText.split('');

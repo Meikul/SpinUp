@@ -16,17 +16,21 @@
   <link rel="stylesheet" href="spinner.css">
   <script src="spinner.js" defer></script>
 
+  <link rel="stylesheet" href="navdrawer.css">
+  <script src="navdrawer.js" defer></script>
+
   <link rel="stylesheet" href="docs.css">
+  <script src="docs.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body>
   <header class="navbar translucent">
-    <a href="javascript: void()" class="navbar-title size-changing">SpinUp</a>
+    <a href="javascript:void(0)" class="navbar-title size-changing">SpinUp</a>
     <nav class="navbar-links">
-      <a href="javascript: void()">Get Started</a>
-      <a href="javascript: void()" class="active-link">Components</a>
-      <a href="javascript: void()">Examples</a>
-      <a href="javascript: void()">Contribute</a>
+      <a href="javascript:void(0)">Get Started</a>
+      <a href="javascript:void(0)" class="active-link">Components</a>
+      <a href="javascript:void(0)">Examples</a>
+      <a href="javascript:void(0)">Contribute</a>
     </nav>
   </header>
   <main class="content">
@@ -36,9 +40,56 @@
         <div class="button-examples">
           <button class="btn">Button</button>
           <button class="btn">Icon Button<span class="material-symbols-outlined">arrow_forward</span></button>
-          <button class="btn outline-btn">Outline</button>
           <button class="btn fab"><span class="material-symbols-outlined">add</span></button>
         </div>
+      </div>
+      <div class="code-block">
+        <div class="code-block-label">HTML <span class="material-symbols-outlined copy-content" title="Copy Content">content_copy</span></div>
+        <pre id="button-html"></pre>
+      </div>
+      <div class="code-block collapsed">
+        <div class="code-block-label">CSS <span class="material-symbols-outlined copy-content" title="Copy Content">content_copy</span></div>
+        <pre>button.btn {
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: var(--text-sm);
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  background: rgb(var(--foreground));
+  transition: all 0.15s var(--spinup-ease);
+  justify-content: center;
+  gap: 2px;
+
+  &:hover {
+    background: rgb(var(--foreground)/.8);
+  }
+
+  &:active {
+    background: rgb(var(--foreground)/.7);
+  }
+
+  &.fab {
+    padding: 0;
+    border-radius: 50%;
+    height: 4rem;
+    width: 4rem;
+
+    span.material-symbols-outlined{
+      font-size: 20px;
+    }
+  }
+
+  span.material-symbols-outlined {
+    font-size: inherit;
+  }
+}</pre>
+        <div class="code-block-show code-block-show-more">Show More <span class="material-symbols-outlined">expand_more</span></div>
+        <div class="code-block-show code-block-show-less">Show Less <span class="material-symbols-outlined">expand_less</span></div>
       </div>
     </section>
     <section>
@@ -50,20 +101,349 @@
           <img src="images/logan_canyon.jpeg" alt="fall leaves">
           <img src="images/logan.jpeg" alt="road through fall leaves">
           <img src="images/zion.jpeg" alt="a view down a red rock canyon">
-          <!-- <div class="progress"><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div> -->
+          <div class="indicator"></div>
         </div>
+      </div>
+      <div class="code-block">
+        <div class="code-block-label">HTML <span class="material-symbols-outlined copy-content" title="Copy Content">content_copy</span></div>
+        <pre id="carousel-html"></pre>
+      </div>
+      <div class="code-block collapsed">
+        <div class="code-block-label">Javascript <span class="material-symbols-outlined copy-content" title="Copy Content">content_copy</span></div>
+        <pre>const carousels = document.querySelectorAll('.carousel');
+
+carousels.forEach((c) => {
+  c.dataset.index = 0;
+  if(c.querySelector('.indicator')){
+    createIndicator(c);
+  }
+  nextSlide(c);
+  const imgs = c.querySelectorAll('img');
+  setTimeout(() => {
+    imgs.forEach((img) => {
+      img.style.transition = 'left 0.5s var(--spinup-ease)';
+    });
+  }, 0);
+
+  const duration = c.dataset.duration ? parseFloat(c.dataset.duration) : 5000;
+  setInterval(() => {
+    nextSlide(c);
+  }, duration);
+});
+
+function createIndicator(carousel) {
+  const indicator = document.createElement('div');
+  indicator.classList.add('indicator');
+  const imgs = carousel.querySelectorAll('img');
+  imgs.forEach(() => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    indicator.appendChild(dot);
+  });
+  carousel.appendChild(indicator);
+}
+
+function nextSlide(carousel) {
+  carousel.querySelector('.center')?.classList.remove('center');
+  carousel.querySelector('.left')?.classList.remove('left');
+  carousel.querySelector('.dot.active')?.classList.remove('active');
+  const index = parseInt(carousel.dataset.index);
+  const imgs = carousel.querySelectorAll('img');
+  const dots = carousel.querySelectorAll('.dot');
+  const leftIndex = (index === 0) ? imgs.length-1 : index - 1;
+  dots[index]?.classList.add('active');
+  imgs[index].classList.add('center');
+  imgs[leftIndex].classList.add('left');
+  carousel.dataset.index = (index + 1) % imgs.length;
+}</pre>
+        <div class="code-block-show code-block-show-more">Show More <span class="material-symbols-outlined">expand_more</span></div>
+        <div class="code-block-show code-block-show-less">Show Less <span class="material-symbols-outlined">expand_less</span></div>
+      </div>
+      <div class="code-block collapsed">
+        <div class="code-block-label">CSS <span class="material-symbols-outlined copy-content" title="Copy Content">content_copy</span></div>
+        <pre>.carousel {
+  position: relative;
+  height: 400px;
+  width: 600px;
+  overflow: hidden;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  border: 1px solid rgb(var(--border-color));
+  border-radius: 8px;
+
+  .indicator {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 10px;
+    border-radius: 5px;
+    background: rgb(var(--background)/.4);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 5px;
+    z-index: 3;
+    padding: 0 1px;
+
+    .dot {
+      height: 3px;
+      width: 3px;
+      margin: 0 3px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      transition: background-color 0.5s var(--spinup-ease);
+
+      &.active {
+        background-color: rgba(255, 255, 255, 0.7);
+      }
+    }
+  }
+
+  img {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+    left: 150%;
+    transform: translateX(-50%);
+    z-index: 0;
+    visibility: hidden;
+
+    &.left {
+      left: -50%;
+      z-index: 1;
+      visibility: visible;
+    }
+
+    &.center {
+      left: 50%;
+      z-index: 2;
+      visibility: visible;
+    }
+  }
+}</pre>
+        <div class="code-block-show code-block-show-more">Show More <span class="material-symbols-outlined">expand_more</span></div>
+        <div class="code-block-show code-block-show-less">Show Less <span class="material-symbols-outlined">expand_less</span></div>
+      </div>
+    </section>
+    <section>
+      <h1 class="section-title">Navbar</h1>
+      <!-- <div class="property-controls">
+        <h3>Properties</h3>
+        <label class="property-checkbox">
+          <input type="checkbox" id="nav-checkbox-translucent" checked="true">
+          <div class="checkbox-box">
+            <span class="material-symbols-outlined">check</span>
+          </div>
+          Translucent
+        </label>
+        <label class="property-checkbox">
+          <input type="checkbox" id="nav-checkbox-size-change" checked="true">
+          <div class="checkbox-box">
+            <span class="material-symbols-outlined">check</span>
+          </div>
+          Logo Size Change
+        </label>
+      </div> -->
+      <div class="preview-box">
+        <div class="navbar-example filler-example">
+          <header class="navbar translucent">
+            <a href="javascript:void(0)" class="navbar-title size-changing">SpinUp</a>
+            <nav class="navbar-links">
+              <a href="javascript:void(0)">Normal Link</a>
+              <a href="javascript:void(0)" class="active-link">Active Link</a>
+              <a href="javascript:void(0)">Normal Link</a>
+              <a href="javascript:void(0)">Normal Link</a>
+            </nav>
+          </header>
+          <div class="filler-box">
+            <div class="scroll-text">
+              Scroll Down <span class="material-symbols-outlined">east</span>
+              Scroll Down <span class="material-symbols-outlined">east</span>
+              Scroll Down <span class="material-symbols-outlined">east</span>
+              Scroll Down <span class="material-symbols-outlined">east</span>
+              Scroll Down <span class="material-symbols-outlined">east</span>
+              Scroll Down <span class="material-symbols-outlined">east</span>
+              Scroll Down :)
+            </div>
+            <div class="filler-lines">
+              <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewbox='0 0 100 600'>
+                <path d='M 50 10 Q 0 55, 50 100 Q 100 150, 50 200 Q 0 250, 50 300 Q 100 350, 50 400 Q 0 450, 50 500 Q 100 550, 50 590' stroke='#dadada' stroke-width="15" stroke-linecap="round" fill='transparent'></path>
+              </svg>
+              <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewbox='0 0 100 600'>
+                <path d='M 50 10 Q 0 55, 50 100 Q 100 150, 50 200 Q 0 250, 50 300 Q 100 350, 50 400 Q 0 450, 50 500 Q 100 550, 50 590' stroke='#dadada' stroke-width="15" stroke-linecap="round" fill='transparent'></path>
+              </svg>
+              <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewbox='0 0 100 600'>
+                <path d='M 50 10 Q 0 55, 50 100 Q 100 150, 50 200 Q 0 250, 50 300 Q 100 350, 50 400 Q 0 450, 50 500 Q 100 550, 50 590' stroke='#dadada' stroke-width="15" stroke-linecap="round" fill='transparent'></path>
+              </svg>
+              <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewbox='0 0 100 600'>
+                <path d='M 50 10 Q 0 55, 50 100 Q 100 150, 50 200 Q 0 250, 50 300 Q 100 350, 50 400 Q 0 450, 50 500 Q 100 550, 50 590' stroke='#dadada' stroke-width="15" stroke-linecap="round" fill='transparent'></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-block-label">HTML <span class="material-symbols-outlined copy-content" title="Copy Content">content_copy</span></div>
+        <pre id="navbar-html"></pre>
+      </div>
+      <div class="code-block">
+        <div class="code-block-label">Javascript <span class="material-symbols-outlined copy-content" title="Copy Content">content_copy</span></div>
+        <pre>let isScrolled = false;
+const scrollThreshold = 16;
+
+checkScrolled();
+document.addEventListener('scroll', checkScrolled);
+
+function checkScrolled() {
+  // The 'scroll' event fires a lot, so check isScrolled to avoid unnecessary DOM accesses
+  if (window.scrollY > scrollThreshold && !isScrolled) {
+    isScrolled = true;
+    document.querySelector('.navbar .navbar-title').classList.add('scrolled');
+  }
+  else if (window.scrollY === 0 && isScrolled) {
+    isScrolled = false;
+    document.querySelector('.navbar .navbar-title').classList.remove('scrolled');
+  }
+}</pre>
+      </div>
+      <div class="code-block collapsed">
+        <div class="code-block-label">CSS <span class="material-symbols-outlined copy-content" title="Copy Content">content_copy</span></div>
+        <pre>.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px solid rgb(var(--border-color));
+  display: flex;
+  padding: 16px 32px;
+  align-items: center;
+  gap: 25px;
+  background: rgb(var(--background));
+  z-index: 10;
+
+  &.translucent{
+    backdrop-filter: blur(8px);
+    background: rgb(var(--background)/.8);
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .navbar-title {
+    font-size: 1.2rem;
+    font-weight: 900;
+
+
+    &.size-changing{
+      transition: font-size 0.3s var(--spinup-ease);
+
+      .navbar-icon {
+        transform: scale(1);
+        transform-origin: right bottom;
+        transition: transform 0.3s var(--spinup-ease);
+        height: 1.2rem;
+      }
+
+      &:not(.scrolled) {
+        font-size: 2rem;
+
+        .navbar-icon {
+          transform: scale(1.6);
+        }
+      }
+    }
+  }
+
+  .navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    a {
+      color: rgb(var(--foreground)/.6);
+      font-size: .875rem;
+      transition: color 0.15s var(--spinup-ease);
+
+      &:hover {
+        color: rgb(var(--foreground)/.8);
+      }
+
+      &.active-link {
+        color: rgb(var(--foreground));
+      }
+    }
+  }
+}</pre>
+        <div class="code-block-show code-block-show-more">Show More <span class="material-symbols-outlined">expand_more</span></div>
+        <div class="code-block-show code-block-show-less">Show Less <span class="material-symbols-outlined">expand_less</span></div>
       </div>
     </section>
     <section>
       <h1 class="section-title">Loading Spinners</h1>
       <div class="preview-box">
         <div class="loader-examples">
-          <div class="loader-tilt">LOADING</div>
+          <!-- SVG curved text technique taken from Jhey Tompkins https://dev.to/jh3y/circular-text-with-css-57jf -->
+          <!-- <svg class="loader-ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path id="circlePath" fill="none" d="
+                  M 10, 50
+                  a 40,40 0 1,1 80,0
+                  a 40,40 0 1,1 -80,0
+                " />
+            <text id="text" fill="rgb(var(--foreground))">
+              <textPath id="textPath" href="#circlePath">Loading·Loading·Loading·</textPath>
+            </text>
+          </svg> -->
         </div>
       </div>
     </section>
-    <img src="harbor seal, Phoca vitulina.jpeg" style="width:300px" alt="">
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut consectetur quo sapiente ea, itaque provident obcaecati saepe fugit. Non dolores aliquid amet nesciunt molestiae cum, ab aperiam! Maiores, repudiandae sint. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius tempora provident ea aut, sed maxime atque rem nihil aperiam quas voluptas. Necessitatibus numquam incidunt voluptatibus deserunt temporibus natus harum tempora.</p>
+    <section>
+      <h1 class="section-title">Navigation Drawer</h1>
+      <div class="preview-box">
+        <div class="nav-drawer-example filler-example">
+          <div class="nav-drawer translucent">
+            <button class="nav-drawer-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="#fafafa" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+              </svg>
+            </button>
+            <nav class="nav-drawer-panel">
+              <a href="javascript:void(0)">Normal Link</a>
+              <a href="javascript:void(0)" class="active-link">Active Link</a>
+              <a href="javascript:void(0)">Normal Link</a>
+              <a href="javascript:void(0)">Normal Link</a>
+            </nav>
+            <div class="nav-drawer-mask"></div>
+          </div>
+          <div class="filler-box">
+            <div class="filler-lines">
+              <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewbox='0 0 100 600'>
+                <path d='M 50 10 Q 0 55, 50 100 Q 100 150, 50 200 Q 0 250, 50 300 Q 100 350, 50 400 Q 0 450, 50 500 Q 100 550, 50 590' stroke='#dadada' stroke-width="15" stroke-linecap="round" fill='transparent'></path>
+              </svg>
+              <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewbox='0 0 100 600'>
+                <path d='M 50 10 Q 0 55, 50 100 Q 100 150, 50 200 Q 0 250, 50 300 Q 100 350, 50 400 Q 0 450, 50 500 Q 100 550, 50 590' stroke='#dadada' stroke-width="15" stroke-linecap="round" fill='transparent'></path>
+              </svg>
+              <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewbox='0 0 100 600'>
+                <path d='M 50 10 Q 0 55, 50 100 Q 100 150, 50 200 Q 0 250, 50 300 Q 100 350, 50 400 Q 0 450, 50 500 Q 100 550, 50 590' stroke='#dadada' stroke-width="15" stroke-linecap="round" fill='transparent'></path>
+              </svg>
+              <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewbox='0 0 100 600'>
+                <path d='M 50 10 Q 0 55, 50 100 Q 100 150, 50 200 Q 0 250, 50 300 Q 100 350, 50 400 Q 0 450, 50 500 Q 100 550, 50 590' stroke='#dadada' stroke-width="15" stroke-linecap="round" fill='transparent'></path>
+              </svg>
+            </div>
+            <div class="scroll-text">
+              Filler Content <span class="material-symbols-outlined">atr</span>
+              Filler Content <span class="material-symbols-outlined">atr</span>
+              Filler Content <span class="material-symbols-outlined">atr</span>
+              Filler Content <span class="material-symbols-outlined">atr</span>
+              Filler Content <span class="material-symbols-outlined">atr</span>
+              Filler Content :)
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <p style="margin-bottom: 1000px;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut consectetur quo sapiente ea, itaque provident obcaecati saepe fugit. Non dolores aliquid amet nesciunt molestiae cum, ab aperiam! Maiores, repudiandae sint. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius tempora provident ea aut, sed maxime atque rem nihil aperiam quas voluptas. Necessitatibus numquam incidunt voluptatibus deserunt temporibus natus harum tempora.</p>
   </main>
 </body>
 </html>

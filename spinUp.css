@@ -1,7 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 @font-face {
   font-family: 'Geist Sans';
   src: url("GeistVariableVF.woff2") format("woff2-variations");
 }
+
+/* @import url('https: //cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.2/300.min.css'); */
+/* @import url('https: //cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.2/400.min.css'); */
+/* @import url('https: //cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.2/500.min.css'); */
+/* @import url('https: //cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.2/600.min.css'); */
+/* @import url('https: //cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.2/700.min.css'); */
 
 * {
   box-sizing: border-box;
@@ -15,12 +24,13 @@
   --text-md: 1rem;
   --text-lg: 1.25rem;
   --spinup-ease: cubic-bezier(.4, .0, .3, 1);
+  --font: 'Geist Sans', 'Inter', sans-serif;
 }
 
 body {
   background: rgb(var(--background));
   color: rgb(var(--foreground));
-  font-family: 'Geist Sans', sans-serif;
+  font-family: var(--font);
   margin: 0;
 }
 
