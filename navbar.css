@@ -54,6 +54,8 @@
       font-size: .875rem;
       color: rgb(var(--foreground)/.6);
       transition: color 0.15s var(--spinup-ease);
+      display: inline-flex;
+      align-items: center;
 
       &:hover {
         color: rgb(var(--foreground)/.8);
@@ -61,6 +63,10 @@
 
       &.active-link {
         color: rgb(var(--foreground));
+      }
+
+      span.material-symbols-outlined {
+        font-size: inherit;
       }
     }
   }

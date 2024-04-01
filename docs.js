@@ -7,7 +7,7 @@ navbarExample.addEventListener('scroll', exCheckScrolled);
 
 function exCheckScrolled() {
   // The 'scroll' event fires a lot, so check exScrolled to avoid unnecessary DOM accesses
-  if (window.scrollY > exScrollThreshold && !exScrolled) {
+  if (navbarExample.scrollTop > exScrollThreshold && !exScrolled) {
     exScrolled = true;
     document.querySelector('.navbar-example .navbar .navbar-title').classList.add('scrolled');
   }
@@ -54,3 +54,18 @@ document.getElementById('carousel-html').innerText = `<div class="carousel" data
 document.getElementById('button-html').innerText = `<button class="btn">Button</button>
 <button class="btn">Icon Button<span class="material-symbols-outlined">arrow_forward</span></button>
 <button class="btn fab"><span class="material-symbols-outlined">add</span></button>`;
+
+document.getElementById('nav-drawer-html').innerText = `<div class="nav-drawer translucent">
+  <button class="nav-drawer-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+      <path fill="#fafafa" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+    </svg>
+  </button>
+  <nav class="nav-drawer-panel">
+    <a href="#">Normal Link</a>
+    <a href="#" class="active-link">Active Link</a>
+    <a href="#">Normal Link</a>
+    <a href="#">Normal Link</a>
+  </nav>
+  <div class="nav-drawer-mask"></div>
+</div>`;

@@ -14,7 +14,6 @@
     --duration: 2s;
     animation-duration: var(--duration);
     font-weight: 700;
-    /* animation-timing-function: var(--spinup-ease); */
     animation-timing-function: ease-in-out;
     animation-delay: calc(var(--split-index)*calc(var(--duration)*.1));
     animation-iteration-count: infinite;
@@ -46,11 +45,11 @@
   }
 }
 
-svg.loader-ring {
+svg.loader-text-ring {
   width: 100px;
   color: rgb(var(--foreground));
   transform: rotate(0);
-  animation: ring-rotate 9s linear infinite;
+  /* animation: ring-rotate 9s linear infinite; */
 
   text {
     font-family: monospace;
@@ -62,5 +61,51 @@ svg.loader-ring {
 @keyframes ring-rotate {
   to {
     transform: rotate(360deg);
+  }
+}
+
+.loader-squircle {
+  width: 100px;
+  height: 100px;
+  /* background-color: blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2px;
+
+  .squircle {
+    height: 30%;
+    width: 30%;
+    border: 3px solid rgb(var(--foreground));
+    animation: squircle-spin 0.6s linear infinite;
+    border-radius: 0px 0px 50% 50%;
+
+    &:nth-child(2) {
+      animation: squircle-spin-down 0.6s linear infinite;
+    }
+  }
+}
+
+@keyframes squircle-spin {
+  from {
+    border-radius: 0px 0px 50% 50%;
+    rotate: 0deg;
+  }
+  to {
+    border-radius: 0px 50% 50% 0px;
+    rotate: 90deg;
+  }
+}
+
+@keyframes squircle-spin-down {
+  from {
+    border-radius: 50% 50% 0px 0px;
+    rotate: 0deg;
+  }
+
+  to {
+    border-radius: 0px 50% 50% 0px;
+    rotate: -90deg;
   }
 }

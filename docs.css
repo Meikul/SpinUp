@@ -1,8 +1,13 @@
-body {
-}
-
 section {
   margin-bottom: 1.5rem;
+}
+
+h3 {
+  margin-block-end: 7px;
+}
+
+ul.options {
+  margin-block-start: 7px;
 }
 
 .content {
@@ -15,6 +20,19 @@ section {
   font-size: 2.25rem;
   letter-spacing: -.025em;
   margin-bottom: 15px;
+}
+
+code {
+  background-color: rgb(var(--foreground)/.25);
+  padding: 2px;
+  border-radius: 4px;
+  text-wrap: nowrap;
+  font-size: 0.825rem;
+}
+
+.options li {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
 }
 
 .preview-box {
@@ -45,7 +63,7 @@ section {
   display: flex;
   height: 300px;
   width: 100%;
-  gap: 30px;
+  gap: 90px;
   align-items: center;
   justify-content: center;
 }
@@ -132,6 +150,11 @@ section {
   overflow: hidden;
   position: relative;
 
+  .deemphasized {
+    font-size: 0.825rem;
+    color: rgb(var(--foreground)/0.7);
+  }
+
   .code-block-show {
     position: absolute;
     left: 50%;
@@ -161,7 +184,6 @@ section {
       bottom: 0;
       left: 0;
       background: linear-gradient(rgb(var(--background)/0), rgb(var(--background)));
-      /* background-color: blue; */
     }
 
     .code-block-show-more {
@@ -174,7 +196,7 @@ section {
   }
 
   &.expanded {
-    max-height: unset;
+    max-height: fit-content;
 
     .code-block-show-more {
       display: none;
@@ -278,4 +300,5 @@ label.property-checkbox {
 
 .nav-drawer-example {
   position: relative;
+  overflow: hidden;
 }
