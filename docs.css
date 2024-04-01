@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 section {
   margin-bottom: 1.5rem;
 }
@@ -97,7 +99,6 @@ code {
 
     p {
       text-align: justify;
-      /* padding-right: 10px; */
     }
 
     #filler-img1 {
@@ -276,19 +277,6 @@ label.property-checkbox {
   input:checked ~ .checkbox-box {
     background-color: rgb(var(--foreground));
   }
-
-  /* &:has(input:checked)::before {
-    background-color: rgb(var(--foreground));
-  }
-
-  &::before {
-    display: inline-block;
-    height: 14px;
-    width: 14px;
-    content: '';
-    border: 1px solid rgb(var(--foreground));
-    border-radius: 4px;
-  } */
 }
 .property-controls {
   margin-bottom: 15px;

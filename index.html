@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="carousel.css">
   <script src="carousel.js" defer></script>
 
-  <link rel="stylesheet" href="spinner.css">
-  <script src="spinner.js" defer></script>
+  <link rel="stylesheet" href="loader.css">
+  <script src="loader.js" defer></script>
 
   <link rel="stylesheet" href="navdrawer.css">
   <script src="navdrawer.js" defer></script>
@@ -25,7 +25,7 @@
 </head>
 <body>
   <header class="navbar translucent">
-    <a href="javascript:void(0)" class="navbar-title">SpinUp <span style="color: red;">REPLACE</span></a>
+    <a href="javascript:void(0)" class="navbar-title size-changing">SpinUp</a>
     <nav class="navbar-links">
       <a href="javascript:void(0)">Get Started</a>
       <a href="javascript:void(0)" class="active-link">Components</a>
@@ -34,6 +34,52 @@
     </nav>
   </header>
   <main class="content">
+    <section>
+      <h1 class="section-title">Note</h1>
+      <p>For any of these components to work, you must include the following CSS snippet on your page.</p>
+      <p>You can change some of the properties of your page by changing the variables in this snippet.</p>
+      <div class="code-block collapsed">
+        <div class="code-block-label">CSS <span class="material-symbols-outlined copy-content" title="Copy Content">content_copy</span></div>
+        <pre>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /***
+    The color variables have three numbers which represent RGB values.
+  ***/
+  --background: 9 9 11;
+  --foreground: 250 250 250;
+  --border-color: 39 39 42;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --spinup-ease: cubic-bezier(.4, .0, .3, 1);
+  --font: 'Geist Sans', 'Inter', sans-serif;
+}
+
+body {
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-family: var(--font);
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+@font-face {
+  font-family: 'Geist Sans';
+  src: url("GeistVariableVF.woff2") format("woff2-variations");
+}</pre>
+        <div class="code-block-show code-block-show-more">Show More <span class="material-symbols-outlined">expand_more</span></div>
+        <div class="code-block-show code-block-show-less">Show Less <span class="material-symbols-outlined">expand_less</span></div>
+      </div>
+    </section>
+    <pre></pre>
     <section>
       <h1 class="section-title">Button</h1>
       <div class="preview-box">
@@ -235,23 +281,6 @@ function nextSlide(carousel) {
     </section>
     <section>
       <h1 class="section-title">Navbar</h1>
-      <!-- <div class="property-controls">
-        <h3>Properties</h3>
-        <label class="property-checkbox">
-          <input type="checkbox" id="nav-checkbox-translucent" checked="true">
-          <div class="checkbox-box">
-            <span class="material-symbols-outlined">check</span>
-          </div>
-          Translucent
-        </label>
-        <label class="property-checkbox">
-          <input type="checkbox" id="nav-checkbox-size-change" checked="true">
-          <div class="checkbox-box">
-            <span class="material-symbols-outlined">check</span>
-          </div>
-          Logo Size Change
-        </label>
-      </div> -->
       <div class="preview-box">
         <div class="navbar-example filler-example">
           <header class="navbar translucent">
@@ -397,6 +426,7 @@ function checkScrolled() {
       <h1 class="section-title">Loading Spinners</h1>
       <div class="preview-box">
         <div class="loader-examples">
+          <!-- Text Ring Loader -->
           <!-- SVG curved text technique taken from Jhey Tompkins https://dev.to/jh3y/circular-text-with-css-57jf -->
           <svg class="loader-text-ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <path id="circlePath" fill="none" d="
@@ -408,11 +438,157 @@ function checkScrolled() {
               <textPath id="textPath" href="#circlePath">Loading·Loading·Loading·</textPath>
             </text>
           </svg>
-          <div class="loader-squircle">
-            <div class="squircle"></div>
-            <div class="squircle"></div>
+
+          <!-- Squircle Loader -->
+          <div class="loader-squircle"></div>
+
+          <!-- Blob Loader -->
+          <div class="loader-blob">
+            <div class="follower"></div>
           </div>
         </div>
+      </div>
+      <div class="code-block">
+        <div class="code-block-label">HTML<span class="material-symbols-outlined copy-content" title="Copy Content">content_copy</span></div>
+        <pre id="loader-html"></pre>
+      </div>
+      <div class="code-block">
+        <div class="code-block-label">Javascript <span class="deemphasized">(only needed for the blob loader)</span><span class="material-symbols-outlined copy-content" title="Copy Content">content_copy</span></div>
+        <pre>function initSpinners() {
+  document.querySelectorAll('.loader-blob').forEach((blobLoader) => {
+    blobLoader.addEventListener('mousemove', (e) => {
+      const target = e.target.closest('.loader-blob');
+      const rect = target.getBoundingClientRect();
+      const x = e.clientX - rect.left - (target.clientWidth / 2);
+      const y = e.clientY - rect.top - (target.clientHeight / 2);
+      blobLoader.querySelector('.follower').style.setProperty('--follower-x', `${x * 0.6}px`);
+      blobLoader.querySelector('.follower').style.setProperty('--follower-y', `${y * 0.6}px`);
+    });
+    blobLoader.addEventListener('mouseleave', () => {
+      blobLoader.querySelector('.follower').style.setProperty('--follower-x', `0px`);
+      blobLoader.querySelector('.follower').style.setProperty('--follower-y', `0px`);
+    })
+  });
+}
+
+initSpinners();</pre>
+      </div>
+      <div class="code-block collapsed">
+        <div class="code-block-label">CSS <span class="material-symbols-outlined copy-content" title="Copy Content">content_copy</span></div>
+        <pre>svg.loader-text-ring {
+  width: 100px;
+  color: rgb(var(--foreground));
+  transform: rotate(0);
+  animation: ring-rotate 9s linear infinite;
+
+  text {
+    font-family: monospace;
+    font-size: 17.3px;
+    font-weight: bold;
+  }
+}
+
+@keyframes ring-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-squircle {
+  width: 100px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2px;
+
+  &::before, &::after {
+    display: block;
+    content: '';
+    height: 30%;
+    width: 30%;
+    border: 3px solid rgb(var(--foreground));
+  }
+
+  &::before {
+    animation: squircle-spin 0.6s linear infinite;
+  }
+
+  &::after {
+    animation: squircle-spin-down 0.6s linear infinite;
+  }
+}
+
+@keyframes squircle-spin {
+  from {
+    border-radius: 0px 0px 50% 50%;
+    rotate: 0deg;
+  }
+  to {
+    border-radius: 0px 50% 50% 0px;
+    rotate: 90deg;
+  }
+}
+
+@keyframes squircle-spin-down {
+  from {
+    border-radius: 50% 50% 0px 0px;
+    rotate: 0deg;
+  }
+
+  to {
+    border-radius: 0px 50% 50% 0px;
+    rotate: -90deg;
+  }
+}
+
+.loader-blob {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  aspect-ratio: 1;
+  box-sizing: border-box;
+  background:
+    radial-gradient(farthest-side, rgb(var(--foreground)) 98%, #0000),
+    radial-gradient(farthest-side, rgb(var(--foreground)) 50%, #0000 47%),
+    radial-gradient(farthest-side, rgb(var(--foreground)) 50%, #0000 47%),
+    rgb(var(--background));
+  background-position: center, 5%, 95%;
+  animation: blob-orbit 2s var(--spinup-ease) infinite;
+  border-radius: 50%;
+  background-size: 40% 40%;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  filter: blur(4px) contrast(10);
+
+  .follower {
+    --follower-x: 0px;
+    --follower-y: 0px;
+    background-color: rgb(var(--foreground));
+    width: 16%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: translate(var(--follower-x), var(--follower-y));
+  }
+
+  &:not(:hover) .follower{
+    transition: transform 0.3s var(--spinup-ease);
+  }
+}
+
+@keyframes blob-orbit {
+  50% {
+    background-position: center, 95%, 5%;
+  }
+  to {
+    background-position: center, 5%, 95%;
+  }
+}</pre>
+        <div class="code-block-show code-block-show-more">Show More <span class="material-symbols-outlined">expand_more</span></div>
+        <div class="code-block-show code-block-show-less">Show Less <span class="material-symbols-outlined">expand_less</span></div>
       </div>
     </section>
     <section>

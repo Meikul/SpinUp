@@ -1,0 +1,112 @@
+svg.loader-text-ring {
+  width: 100px;
+  color: rgb(var(--foreground));
+  transform: rotate(0);
+  animation: ring-rotate 9s linear infinite;
+
+  text {
+    font-family: monospace;
+    font-size: 17.3px;
+    font-weight: bold;
+  }
+}
+
+@keyframes ring-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-squircle {
+  width: 100px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2px;
+
+  &::before, &::after {
+    display: block;
+    content: '';
+    height: 30%;
+    width: 30%;
+    border: 3px solid rgb(var(--foreground));
+  }
+
+  &::before {
+    animation: squircle-spin 0.6s linear infinite;
+  }
+
+  &::after {
+    animation: squircle-spin-down 0.6s linear infinite;
+  }
+}
+
+@keyframes squircle-spin {
+  from {
+    border-radius: 0px 0px 50% 50%;
+    rotate: 0deg;
+  }
+  to {
+    border-radius: 0px 50% 50% 0px;
+    rotate: 90deg;
+  }
+}
+
+@keyframes squircle-spin-down {
+  from {
+    border-radius: 50% 50% 0px 0px;
+    rotate: 0deg;
+  }
+
+  to {
+    border-radius: 0px 50% 50% 0px;
+    rotate: -90deg;
+  }
+}
+
+.loader-blob {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  aspect-ratio: 1;
+  box-sizing: border-box;
+  background:
+    radial-gradient(farthest-side, rgb(var(--foreground)) 98%, #0000),
+    radial-gradient(farthest-side, rgb(var(--foreground)) 50%, #0000 47%),
+    radial-gradient(farthest-side, rgb(var(--foreground)) 50%, #0000 47%),
+    rgb(var(--background));
+  background-position: center, 5%, 95%;
+  animation: blob-orbit 2s var(--spinup-ease) infinite;
+  border-radius: 50%;
+  background-size: 40% 40%;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  filter: blur(4px) contrast(10);
+
+  .follower {
+    --follower-x: 0px;
+    --follower-y: 0px;
+    background-color: rgb(var(--foreground));
+    width: 16%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: translate(var(--follower-x), var(--follower-y));
+  }
+
+  &:not(:hover) .follower{
+    transition: transform 0.3s var(--spinup-ease);
+  }
+}
+
+@keyframes blob-orbit {
+  50% {
+    background-position: center, 95%, 5%;
+  }
+  to {
+    background-position: center, 5%, 95%;
+  }
+}

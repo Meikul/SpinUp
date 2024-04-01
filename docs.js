@@ -69,3 +69,24 @@ document.getElementById('nav-drawer-html').innerText = `<div class="nav-drawer t
   </nav>
   <div class="nav-drawer-mask"></div>
 </div>`;
+
+document.getElementById('loader-html').innerText = `<!-- Text Ring Loader -->
+<!-- SVG curved text technique taken from Jhey Tompkins https://dev.to/jh3y/circular-text-with-css-57jf -->
+<svg class="loader-text-ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <path id="circlePath" fill="none" d="
+        M 10, 50
+        a 40,40 0 1,1 80,0
+        a 40,40 0 1,1 -80,0
+      " />
+  <text id="text" fill="rgb(var(--foreground))">
+    <textPath id="textPath" href="#circlePath">Loading·Loading·Loading·</textPath>
+  </text>
+</svg>
+
+<!-- Squircle Loader -->
+<div class="loader-squircle"></div>
+
+<!-- Blob Loader -->
+<div class="loader-blob">
+  <div class="follower"></div>
+</div>`;
